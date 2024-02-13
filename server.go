@@ -16,11 +16,13 @@ func main() {
 		port = "8000"
 	}
 
-	gin.SetMode(gin.DebugMode)
+	gin.SetMode(gin.ReleaseMode)
 
 	r := gin.Default()
 
 	models.ConnectToDatabase()
+
+	fmt.Println("server is running")
 
 	r.GET("api/v1/kopisore/ReadTables", models.ReadTable)
 
