@@ -3,6 +3,7 @@ package models
 import (
 	"database/sql"
 	"fmt"
+	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
@@ -32,10 +33,6 @@ func ReadTable(c *gin.Context) {
 			panic(err)
 		}
 		fmt.Println(tableName)
-	}
-
-	// Check for errors during row iteration
-	if err := rows.Err(); err != nil {
-		panic(err)
+		c.JSON(http.StatusOK, gin.H{"msg": tableName})
 	}
 }
