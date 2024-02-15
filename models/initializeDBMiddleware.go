@@ -17,5 +17,7 @@ func ConnectToDatabase() error {
 		return err
 	}
 
+	CreateTable()
+
 	return nil
 }

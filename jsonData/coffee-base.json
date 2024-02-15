@@ -1,0 +1,67 @@
+[
+  {
+    "menu": "Espresso",
+    "hot": "10K",
+    "ice": ""
+  },
+  {
+    "menu": "Americano",
+    "hot": "12K",
+    "ice": "13K"
+  },
+  {
+    "menu": "Coffee Latte",
+    "hot": "15K",
+    "ice": "17K"
+  },
+  {
+    "menu": "Cappucino",
+    "hot": "15K",
+    "ice": "17K"
+  },
+  {
+    "menu": "Machiato",
+    "hot": "15K",
+    "ice": "17K"
+  },
+  {
+    "menu": "Caramel Machiato",
+    "hot": "15K",
+    "ice": "17K"
+  },
+  {
+    "menu": "Vanilla Coffee Latte",
+    "hot": "15K",
+    "ice": "17K"
+  },
+  {
+    "menu": "Lemonade COffee",
+    "hot": "12K",
+    "ice": "14K"
+  },
+  {
+    "menu": "Bobon Coffee",
+    "hot": "12K",
+    "ice": "13K"
+  },
+  {
+    "menu": "Tubruk",
+    "hot": "10K",
+    "ice": ""
+  },
+  {
+    "menu": "V60",
+    "hot": "15K",
+    "ice": ""
+  },
+  {
+    "menu": "Japanese",
+    "hot": "",
+    "ice": "15K"
+  },
+  {
+    "menu": "Vietnam Drip",
+    "hot": "13K",
+    "ice": "14K"
+  }
+]

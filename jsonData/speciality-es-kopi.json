@@ -1,0 +1,22 @@
+[
+  {
+    "menu": "Es Kopi Pagi",
+    "caption": "Espresso+Susu+SKM",
+    "price": "15K"
+  },
+  {
+    "menu": "Es Kopi Siang",
+    "caption": "Espresso+Soda+Syrup Lemon",
+    "price": "15K"
+  },
+  {
+    "menu": "Es Kopi Sore",
+    "caption": "Espresso+Susu+Gula Aren",
+    "price": "15K"
+  },
+  {
+    "menu": "Es Kopi Malam",
+    "caption": "Espresso+Susu+Kopi Balok",
+    "price": "15K"
+  }
+]

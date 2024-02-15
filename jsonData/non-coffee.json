@@ -1,0 +1,86 @@
+[{
+  "menu": "Choco",
+  "hot": "12K",
+  "ice": "10K"
+},
+{
+  "menu": "Matcha",
+  "hot": "12K",
+  "ice": "10K"
+},
+{
+  "menu": "Taro",
+  "hot": "12K",
+  "ice": "10K"
+},
+{
+  "menu": "Redvelvet",
+  "hot": "12K",
+  "ice": "10K"
+},
+{
+  "menu": "Mango Yakult",
+  "hot": "",
+  "ice": "10K"
+},
+{
+  "menu": "Melon Yakult",
+  "hot": "",
+  "ice": "10K"
+},
+{
+  "menu": "Vanilla Latte",
+  "hot": "10K",
+  "ice": "12K"
+},
+{
+  "menu": "Caramel Latte",
+  "hot": "10K",
+  "ice": "12K"
+},
+{
+  "menu": "SunRen",
+  "hot": "10K",
+  "ice": "12K"
+},
+{
+  "menu": "Sugar Milk Tea",
+  "hot": "10K",
+  "ice": "12K"
+},
+{
+  "menu": "Lemon Squash",
+  "hot": "",
+  "ice": "12K"
+},
+{
+  "menu": "Mangga Squash",
+  "hot": "",
+  "ice": "12K"
+},
+{
+  "menu": "Melon Squash",
+  "hot": "",
+  "ice": "12K"
+},
+{
+  "menu": "Lemon Tea",
+  "hot": "10K",
+  "ice": "10K"
+},
+{
+  "menu": "Milky Mango",
+  "hot": "",
+  "ice": "10K"
+},
+{
+  "menu": "Milky Melon",
+  "hot": "",
+  "ice": "10K"
+},
+{
+  "menu": "Milky Copa",
+  "hot": "",
+  "ice": "10K"
+}
+]
