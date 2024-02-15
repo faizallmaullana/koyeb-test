@@ -16,9 +16,11 @@ func GetAllMenu(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to connect to database"})
 		return
 	}
+	defer db.Close() // Close the database connection when done
 
 	// Query for eatery menu
 	eateryRows, err := db.Query("SELECT * FROM menu_eatery")
+	fmt.Println(eateryRows)
 	if err != nil {
 		fmt.Println("Error executing eatery query:", err)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to execute eatery query"})
@@ -178,5 +180,4 @@ func GetAllMenu(c *gin.Context) {
 		"speciality": specialityMenus,
 	})
 
-	defer db.Close() // Close the database connection when done
 }
