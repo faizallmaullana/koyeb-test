@@ -30,7 +30,7 @@ func GetAllMenu(c *gin.Context) {
 	// Query for coffee menu
 	coffeeRows, err := db.Query("SELECT * FROM menu_coffee")
 	if err != nil {
-		fmt.Println("Error executing coffee query:", err)
+		fmt.Println("Error executing cooffee query:", err)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to execute coffee query"})
 		return
 	}
@@ -39,7 +39,7 @@ func GetAllMenu(c *gin.Context) {
 	// Query for eatery non coffee
 	nonCoffeeRows, err := db.Query("SELECT * FROM menu_non_coffee")
 	if err != nil {
-		fmt.Println("Error executing eatery query:", err)
+		fmt.Println("Error executing non-coffee query:", err)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to execute non coffee query"})
 		return
 	}
@@ -48,7 +48,7 @@ func GetAllMenu(c *gin.Context) {
 	// Query for special menu
 	specialityRows, err := db.Query("SELECT * FROM menu_speciality")
 	if err != nil {
-		fmt.Println("Error executing eatery query:", err)
+		fmt.Println("Error executing speciality query:", err)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to execute speciality query"})
 		return
 	}
@@ -161,8 +161,8 @@ func GetAllMenu(c *gin.Context) {
 		return
 	}
 	if err := nonCoffeeRows.Err(); err != nil {
-		fmt.Println("Error iterating eatery rows:", err)
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Error iterating eatery rows"})
+		fmt.Println("Error iterating noncoffee rows:", err)
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Error iterating noncoffee rows"})
 		return
 	}
 	if err := specialityRows.Err(); err != nil {
