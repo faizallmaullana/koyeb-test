@@ -7,9 +7,17 @@ import (
 	"github.com/faizallmaullana/test-koyeb/controller"
 	"github.com/faizallmaullana/test-koyeb/jsonData"
 	"github.com/faizallmaullana/test-koyeb/models"
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	_ "github.com/lib/pq" // Import PostgreSQL driver
 )
+
+var corsConfig = cors.DefaultConfig()
+
+func init() {
+	// allow all origins
+	corsConfig.AllowAllOrigins = true
+}
 
 func main() {
 	port := os.Getenv("PORT")
@@ -20,7 +28,10 @@ func main() {
 
 	gin.SetMode(gin.ReleaseMode)
 
-	r := gin.Default()
+	r := gin.New()
+
+	// Use cors middleware
+	r.Use(cors.New(corsConfig))
 
 	models.ConnectToDatabase()
 
