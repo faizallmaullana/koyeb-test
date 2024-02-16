@@ -9,7 +9,7 @@ import (
 	"github.com/faizallmaullana/test-koyeb/models"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
-	_ "github.com/lib/pq" // Import PostgreSQL driver
+	_ "github.com/lib/pq"
 )
 
 var corsConfig = cors.DefaultConfig()
@@ -42,6 +42,8 @@ func main() {
 
 	r.GET("api/v1/kopisore/menus", controller.GetAllMenu)
 	r.POST("api/v1/kopisore/menus", jsonData.ReadJson)
+
+	r.POST("api/v1/kopisore/login", controller.Login)
 
 	r.Run(fmt.Sprintf(":%s", port))
 }
