@@ -1,6 +1,6 @@
 module github.com/faizallmaullana/test-koyeb
 
-go 1.22
+go 1.20
 
 require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
