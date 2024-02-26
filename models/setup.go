@@ -13,14 +13,16 @@ var DB *gorm.DB
 func ConnectToDatabase() {
 	pwd, _ := os.Getwd()
 	fmt.Println("Current working directory:", pwd)
-	database, err := gorm.Open("sqlite3", "database.db")
+	database, err := gorm.Open("sqlite3", "zpd.db")
 
 	if err != nil {
 		panic("Failed to connect to database!")
 	}
 
 	database.AutoMigrate(
-		&Users{},
+		&Authentication{},
+		&Token{},
+		&Staff{},
 	)
 
 	DB = database

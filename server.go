@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/faizallmaullana/test-koyeb/controllers"
+	"github.com/faizallmaullana/test-koyeb/controllers/admin"
 	"github.com/faizallmaullana/test-koyeb/models"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -34,8 +34,7 @@ func main() {
 	r.Use(cors.New(corsConfig))
 	fmt.Println("server is running")
 
-	r.POST("/post", controllers.CreateUser)
-	r.GET("/get", controllers.GetUser)
+	r.POST("/registration", admin.Registration)
 
 	r.Run(fmt.Sprintf(":%s", port))
 }
