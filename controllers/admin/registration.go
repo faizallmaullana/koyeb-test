@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"time"
 
+	jwt_auth "github.com/faizallmaullana/test-koyeb/Authentication"
 	"github.com/faizallmaullana/test-koyeb/controllers"
-	jwt_auth "github.com/faizallmaullana/test-koyeb/jwt_authentication"
 	"github.com/faizallmaullana/test-koyeb/models"
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"

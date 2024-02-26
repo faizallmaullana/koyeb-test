@@ -1,4 +1,4 @@
-package jwt_auth
+package Authentication
 
 import (
 	"net/http"
