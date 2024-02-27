@@ -34,7 +34,8 @@ func main() {
 	r.Use(cors.New(corsConfig))
 	fmt.Println("server is running")
 
-	r.POST("/registration", admin.Registration)
+	r.POST("/api/v1/registration", admin.Registration)
+	r.POST("/api/v1/login", admin.Login)
 
 	r.Run(fmt.Sprintf(":%s", port))
 }

@@ -106,13 +106,13 @@ func Registration(c *gin.Context) {
 
 	location, err := time.LoadLocation("Asia/Bangkok")
 	if err != nil {
-		fmt.Println("Error loading location:", err)
+		c.JSON(http.StatusBadRequest, gin.H{"Error Location": err})
 		return
 	}
 
 	parsedTanggalLahir, err := time.ParseInLocation(layout, date, location)
 	if err != nil {
-		fmt.Println("Error parsing time:", err)
+		c.JSON(http.StatusBadRequest, gin.H{"Error Time": err})
 		return
 	}
 
@@ -155,6 +155,7 @@ func Registration(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{
+		"message":       "success",
 		"authorization": tokenJWT,
 		"role":          input.Role,
 	})
