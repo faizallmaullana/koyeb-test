@@ -2,6 +2,7 @@ package Authentication
 
 import (
 	"net/http"
+	"strings"
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
@@ -75,6 +76,57 @@ func JWTAuthMiddleware() gin.HandlerFunc {
 		c.Next()
 	}
 }
+
+func JWTClaims(tokenString string) (gin.H, error) {
+	// Parse the JWT token.
+	parsedToken, err := jwt.ParseWithClaims(strings.TrimPrefix(tokenString, "Bearer "), &MyClaims{}, func(token *jwt.Token) (interface{}, error) {
+		return secretKey, nil
+	})
+
+	if err != nil {
+		return nil, err
+	}
+
+	// Check if the token is valid.
+	if claims, ok := parsedToken.Claims.(*MyClaims); ok && parsedToken.Valid {
+		// Return user profile data.
+		return gin.H{
+			"username": claims.Username,
+			"staff_id": claims.StaffID,
+			"role":     claims.Role,
+		}, nil
+	}
+	return nil, err
+
+	// usage
+
+	// tokenString := c.GetHeader("Authorization")
+	// profileData, err := jwt_auth.JWTClaims(tokenString)
+
+	// if err != nil {
+	// 	c.JSON(http.StatusUnauthorized, gin.H{"error": "Error parsing token"})
+	// 	return
+	// }
+}
+
+// func JWTHandler(tokenString string) (gin.H, error) {
+// 	// Parse the JWT token.
+// 	parsedToken, err := jwt.ParseWithClaims(strings.TrimPrefix(tokenString, "Bearer "), &MyClaims{}, func(token *jwt.Token) (interface{}, error) {
+// 		return secretKey, nil
+// 	})
+
+// 	if err != nil {
+// 		return nil, err
+// 	}
+
+// 	// Check if the token is valid.
+// 	if claims, ok := parsedToken.Claims.(*MyClaims); ok && parsedToken.Valid {
+// 		// Return user profile data.
+// 		return gin.H{"username": claims.Username}, nil
+// 	}
+
+// 	return nil, err
+// }
 
 // func loginHandler(c *gin.Context) {
 // 	var user User
