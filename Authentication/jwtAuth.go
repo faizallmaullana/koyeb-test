@@ -77,7 +77,7 @@ func JWTAuthMiddleware() gin.HandlerFunc {
 	}
 }
 
-func JWTClaims(tokenString string) (gin.H, error) {
+func JWTClaims(tokenString, role string) (gin.H, error) {
 	// Parse the JWT token.
 	parsedToken, err := jwt.ParseWithClaims(strings.TrimPrefix(tokenString, "Bearer "), &MyClaims{}, func(token *jwt.Token) (interface{}, error) {
 		return secretKey, nil
@@ -89,6 +89,12 @@ func JWTClaims(tokenString string) (gin.H, error) {
 
 	// Check if the token is valid.
 	if claims, ok := parsedToken.Claims.(*MyClaims); ok && parsedToken.Valid {
+
+		// role (guru, admin, all)
+		if claims.Role != role && role != "all" {
+			return nil, err
+		}
+
 		// Return user profile data.
 		return gin.H{
 			"username": claims.Username,

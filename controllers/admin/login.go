@@ -40,10 +40,16 @@ func Login(c *gin.Context) {
 		return
 	}
 
+	profileData, err := jwt_auth.JWTClaims(tokenJWT, "all")
+	if err != nil {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "Error parsing token authorization"})
+		return
+	}
+
 	c.JSON(http.StatusOK, gin.H{
 		"message":       "success",
 		"authorization": tokenJWT,
-		"role":          user.Role,
+		"user":          profileData,
 	})
 }
 

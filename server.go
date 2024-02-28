@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/faizallmaullana/test-koyeb/controllers"
 	"github.com/faizallmaullana/test-koyeb/controllers/admin"
 	"github.com/faizallmaullana/test-koyeb/models"
 	"github.com/gin-contrib/cors"
@@ -36,6 +37,8 @@ func main() {
 
 	r.POST("/api/v1/registration", admin.Registration)
 	r.POST("/api/v1/login", admin.Login)
+
+	r.GET("/api/v1/tester", controllers.Tester)
 
 	r.Run(fmt.Sprintf(":%s", port))
 }

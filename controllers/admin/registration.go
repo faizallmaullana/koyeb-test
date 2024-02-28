@@ -143,13 +143,12 @@ func Registration(c *gin.Context) {
 		}
 	}
 
-	// tokenString := c.GetHeader("Authorization")
-	// profileData, err := jwt_auth.JWTClaims(tokenString)
-
-	// if err != nil {
-	// 	c.JSON(http.StatusUnauthorized, gin.H{"error": "Error parsing token"})
-	// 	return
-	// }
+	tokenString := c.GetHeader("Authorization")
+	profileData, err := jwt_auth.JWTClaims(tokenString, "admin")
+	if err != nil {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "Error parsing token authorization"})
+		return
+	}
 
 	// unique nip
 	var nip string
@@ -247,10 +246,12 @@ func Registration(c *gin.Context) {
 		return
 	}
 
+	fmt.Println(profileData)
+
 	c.JSON(http.StatusOK, gin.H{
 		"message":       "success",
 		"authorization": tokenJWT,
-		"role":          input.Role,
+		"role":          profileData,
 	})
 }
 
