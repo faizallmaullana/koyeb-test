@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"net"
 	"os"
 
 	"github.com/faizallmaullana/test-koyeb/controllers"
@@ -19,6 +20,25 @@ func init() {
 	corsConfig.AllowAllOrigins = true
 }
 
+func getIP() {
+	addr, err := net.InterfaceAddrs()
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	for _, addr := range addr {
+		if ipnet, ok := addr.(*net.IPNet); ok && !ipnet.IP.IsLoopback() {
+			// check if IPv4 or IPv6 is not nil
+			if ipnet.IP.To4() != nil || ipnet.IP.To16 != nil {
+				// print available addresses
+				fmt.Print("Server is running on: ")
+				fmt.Println(ipnet.IP.String())
+			}
+		}
+	}
+}
+
 func main() {
 	port := os.Getenv("PORT")
 
@@ -33,7 +53,8 @@ func main() {
 	// Use cors middleware
 	models.ConnectToDatabase()
 	r.Use(cors.New(corsConfig))
-	fmt.Println("server is running")
+
+	getIP()
 
 	r.POST("/api/v1/registration", admin.Registration)
 	r.POST("/api/v1/login", admin.Login)
