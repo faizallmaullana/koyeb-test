@@ -23,6 +23,13 @@ func ConnectToDatabase() {
 		&Authentication{},
 		&Token{},
 		&Staff{},
+		&Jurusan{},
+		&Kelas{},
+		&Siswa{},
+		&PivotKelasSiswa{},
+		&MataPelajaran{},
+		&MateriAjar{},
+		&CapaianSiswa{},
 	)
 
 	DB = database

@@ -3,7 +3,6 @@ package models
 import "time"
 
 // staff
-// siswa
 
 type Staff struct {
 	ID           string    `json:"id" grom:"primary_key"`

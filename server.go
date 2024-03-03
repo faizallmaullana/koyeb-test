@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"net"
 	"os"
 
 	"github.com/faizallmaullana/test-koyeb/controllers"
@@ -18,25 +17,6 @@ var corsConfig = cors.DefaultConfig()
 func init() {
 	// allow all origins
 	corsConfig.AllowAllOrigins = true
-}
-
-func getIP() {
-	addr, err := net.InterfaceAddrs()
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-
-	for _, addr := range addr {
-		if ipnet, ok := addr.(*net.IPNet); ok && !ipnet.IP.IsLoopback() {
-			// check if IPv4 or IPv6 is not nil
-			if ipnet.IP.To4() != nil || ipnet.IP.To16 != nil {
-				// print available addresses
-				fmt.Print("Server is running on: ")
-				fmt.Println(ipnet.IP.String())
-			}
-		}
-	}
 }
 
 func main() {
@@ -59,7 +39,9 @@ func main() {
 	r.POST("/api/v1/registration", admin.Registration)
 	r.POST("/api/v1/login", admin.Login)
 
+	// stats
 	r.GET("/api/v1/tester", controllers.Tester)
+	r.GET("/api/v1/memory", GetMemory)
 
 	r.Run(fmt.Sprintf(":%s", port))
 }
