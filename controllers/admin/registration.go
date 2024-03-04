@@ -1,5 +1,10 @@
 package admin
 
+// REGISTRATION
+
+// LIST FUNCTION
+// Registration
+
 import (
 	"fmt"
 	"math/rand"
@@ -25,6 +30,19 @@ type inputRegristration struct {
 	Alamat         string `json:"alamat"`
 	Telpon         string `json:"telpon"`
 }
+
+// ALGORITHM
+// Get Input JSON ###
+// Username must uniquely identify ###
+// if first person registration, do another function ###
+// unique nip (db staff) if non-ASN nip = 0 ###
+// Password must strength ###
+// Token checks validity (firstToken is "tokenAdmin") ###
+// regenerate token code ###
+// Create Data on DB ###
+// regenerate token ###
+// Generate Authentication ###
+// Return Value ###
 
 func Registration(c *gin.Context) {
 	var input inputRegristration
@@ -77,7 +95,7 @@ func Registration(c *gin.Context) {
 			created := time.Now().UTC().Add(7 * time.Hour)
 
 			date := input.TanggalLahir
-			layout := "02-01-2006"
+			layout := "2006-01-02"
 
 			location, err := time.LoadLocation("Asia/Bangkok")
 			if err != nil {
@@ -202,7 +220,7 @@ func Registration(c *gin.Context) {
 	created := time.Now().UTC().Add(7 * time.Hour)
 
 	date := input.TanggalLahir
-	layout := "02-01-2006"
+	layout := "2006-01-02"
 
 	location, err := time.LoadLocation("Asia/Bangkok")
 	if err != nil {
@@ -262,15 +280,3 @@ func Registration(c *gin.Context) {
 		"role":          profileData,
 	})
 }
-
-// Get Input JSON ###
-// Username must uniquely identify ###
-// if first person registration, do another function ###
-// unique nip (db staff) if non-ASN nip = 0 ###
-// Password must strength ###
-// Token checks validity (firstToken is "tokenAdmin") ###
-// regenerate token code ###
-// Create Data on DB ###
-// regenerate token ###
-// Generate Authentication ###
-// Return Value ###

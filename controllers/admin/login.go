@@ -1,5 +1,10 @@
 package admin
 
+// LOGIN
+
+// LIST FUNCTIONS
+// Login
+
 import (
 	"net/http"
 
@@ -13,6 +18,12 @@ type inputLogin struct {
 	Username string `json:"username"`
 	Password string `json:"password"`
 }
+
+// ALGORITHM
+// input
+// validate the username and password
+// generate jwt token to authorization
+// return data
 
 func Login(c *gin.Context) {
 	var input inputLogin
@@ -52,8 +63,3 @@ func Login(c *gin.Context) {
 		"user":          profileData,
 	})
 }
-
-// input
-// validate the username and password
-// generate jwt token to authorization
-// return data

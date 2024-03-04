@@ -11,6 +11,11 @@ type Siswa struct {
 	TanggalLahir    time.Time `json:"tanggal_lahir"`
 	JenisKelamin    string    `json:"jenis_kelamin"`
 	Alamat          string    `json:"alamat"`
+	Image           []byte    `json:"image"`
+
+	// status
+	CreatedAt time.Time `json:"created_at"`
+	IsDeleted bool      `json:"is_deleted"`
 }
 
 type PivotKelasSiswa struct {
