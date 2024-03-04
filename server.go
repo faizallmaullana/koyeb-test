@@ -6,6 +6,7 @@ import (
 
 	"github.com/faizallmaullana/test-koyeb/controllers"
 	"github.com/faizallmaullana/test-koyeb/controllers/admin"
+	"github.com/faizallmaullana/test-koyeb/controllers/siswa"
 	"github.com/faizallmaullana/test-koyeb/models"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -36,8 +37,12 @@ func main() {
 
 	getIP()
 
+	// auth
 	r.POST("/api/v1/registration", admin.Registration)
 	r.POST("/api/v1/login", admin.Login)
+
+	// siswa
+	r.POST("/api/v1/siswa", siswa.PostSiswa)
 
 	// stats
 	r.GET("/api/v1/tester", controllers.Tester)
