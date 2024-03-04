@@ -57,5 +57,7 @@ func main() {
 	r.GET("/api/v1/tester", controllers.GetTester)
 	r.GET("/api/v1/memory", GetMemory)
 
+	r.GET("/api/v1/DownloadDB", admin.DownloadDB)
+
 	r.Run(fmt.Sprintf(":%s", port))
 }
