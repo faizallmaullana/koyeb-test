@@ -84,7 +84,9 @@ func JWTClaims(tokenString, role string) (gin.H, error) {
 	})
 
 	if err != nil {
-		return nil, err
+		return gin.H{
+			"status": "Unauthorized",
+		}, err
 	}
 
 	// Check if the token is valid.
@@ -92,7 +94,9 @@ func JWTClaims(tokenString, role string) (gin.H, error) {
 
 		// role (guru, admin, all)
 		if claims.Role != role && role != "all" {
-			return nil, err
+			return gin.H{
+				"status": "Unauthorized",
+			}, err
 		}
 
 		// Return user profile data.
@@ -100,9 +104,12 @@ func JWTClaims(tokenString, role string) (gin.H, error) {
 			"username": claims.Username,
 			"staff_id": claims.StaffID,
 			"role":     claims.Role,
+			"status":   "Authorized",
 		}, nil
 	}
-	return nil, err
+	return gin.H{
+		"status": "Unauthorized",
+	}, err
 
 	// usage
 

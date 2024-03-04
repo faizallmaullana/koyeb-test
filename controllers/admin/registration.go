@@ -143,9 +143,17 @@ func Registration(c *gin.Context) {
 		}
 	}
 
+	//
+	// ! first time registration
+
 	tokenString := c.GetHeader("Authorization")
 	profileData, err := jwt_auth.JWTClaims(tokenString, "admin")
-	if err != nil {
+	if err == nil {
+		if profileData["status"] != "Authorized" {
+			c.JSON(http.StatusUnauthorized, gin.H{"error": "You are unauthorized to access this feature"})
+			return
+		}
+	} else {
 		c.JSON(http.StatusUnauthorized, gin.H{"error": "Error parsing token authorization"})
 		return
 	}

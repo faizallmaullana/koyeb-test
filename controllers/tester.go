@@ -9,8 +9,13 @@ import (
 
 func Tester(c *gin.Context) {
 	tokenString := c.GetHeader("Authorization")
-	profileData, err := jwt_auth.JWTClaims(tokenString, "all")
-	if err != nil {
+	profileData, err := jwt_auth.JWTClaims(tokenString, "guru")
+	if err == nil {
+		if profileData["status"] != "Authorized" {
+			c.JSON(http.StatusUnauthorized, gin.H{"error": "You are unauthorized to access this feature"})
+			return
+		}
+	} else {
 		c.JSON(http.StatusUnauthorized, gin.H{"error": "Error parsing token authorization"})
 		return
 	}
