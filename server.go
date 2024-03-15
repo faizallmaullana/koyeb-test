@@ -45,6 +45,7 @@ func main() {
 
 	// auth
 	r.POST("/api/v1/registration", admin.Registration)
+	r.POST("/api/v1/registration-guru", admin.Registration)
 	r.POST("/api/v1/login", admin.Login)
 
 	// siswa
