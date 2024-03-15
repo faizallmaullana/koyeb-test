@@ -15,5 +15,5 @@ type Authentication struct {
 
 type Token struct {
 	ID    string `json:"id" gorm:"primary_key"`
-	Token string `json:"token"`
+	Token int    `json:"token"`
 }

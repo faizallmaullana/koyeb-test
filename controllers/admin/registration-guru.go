@@ -7,30 +7,15 @@ package admin
 
 import (
 	"fmt"
-	"math/rand"
 	"net/http"
 	"strings"
 	"time"
 
 	jwt_auth "github.com/faizallmaullana/test-koyeb/Authentication"
-	"github.com/faizallmaullana/test-koyeb/controllers/hashing"
 	"github.com/faizallmaullana/test-koyeb/models"
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
 )
-
-type inputRegistration struct {
-	Username     string `json:"username"`
-	Password     string `json:"password"`
-	Role         string `json:"role"`
-	Token        int    `json:"token"`
-	Nip          string `json:"nip"`
-	Nama         string `json:"nama"`
-	TanggalLahir string `json:"tanggal_lahir"`
-	JenisKelamin string `json:"jenis_kelamin"`
-	Alamat       string `json:"alamat"`
-	Telpon       string `json:"telpon"`
-}
 
 // ALGORITHM
 // Get Input JSON ###
@@ -45,7 +30,7 @@ type inputRegistration struct {
 // Generate Authentication ###
 // Return Value ###
 
-func Registration(c *gin.Context) {
+func RegistrationGuru(c *gin.Context) {
 	var input inputRegistration
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -85,69 +70,6 @@ func Registration(c *gin.Context) {
 		return
 	}
 
-	// check password strength
-	var password string
-	isValid, err := hashing.CheckPasswordStrength(input.Password)
-	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
-	} else if isValid {
-		password, _ = hashing.HashPassword(input.Password)
-	} else {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Password strength check failed."})
-		return
-	}
-
-	// validate the token
-	var CekToken models.Token
-	if err := models.DB.First(&CekToken).Error; err != nil {
-		if err.Error() == "record not found" {
-
-			if input.Token != 111111 {
-				c.JSON(http.StatusNotAcceptable, gin.H{"error": "Token not accepted"})
-				return
-			}
-
-			// Seed the random number generator
-			rand.Seed(time.Now().UnixNano())
-
-			// Generate a random 6-digit number
-			min := 100000 // minimum value of a 6-digit number
-			max := 999999 // maximum value of a 6-digit number
-			randomNum := min + rand.Intn(max-min+1)
-
-			inputToken := models.Token{
-				ID:    uuid.New().String(),
-				Token: randomNum,
-			}
-
-			models.DB.Create(&inputToken)
-
-			input.Token = randomNum
-			CekToken.Token = randomNum
-		} else {
-			c.JSON(http.StatusBadGateway, gin.H{"error": err.Error()})
-			return
-		}
-	}
-
-	if input.Token != CekToken.Token {
-		c.JSON(http.StatusNotAcceptable, gin.H{"error": "Token not accepted"})
-		return
-	}
-
-	// Seed the random number generator
-	rand.Seed(time.Now().UnixNano())
-
-	// Generate a random 6-digit number
-	min := 100000 // minimum value of a 6-digit number
-	max := 999999 // maximum value of a 6-digit number
-	randomNum := min + rand.Intn(max-min+1)
-
-	CekToken.Token = randomNum
-
-	models.DB.Model(&CekToken).Update(CekToken)
-
 	// write to the database (users and profiles)
 	dbStaff := models.Staff{
 		ID:           uuid.New().String(),
@@ -165,7 +87,7 @@ func Registration(c *gin.Context) {
 	dbAuth := models.Authentication{
 		ID:       uuid.New().String(),
 		Username: strings.ToLower(input.Username),
-		Password: password,
+		Password: "anonymous",
 		Role:     input.Role,
 		StaffID:  dbStaff.ID,
 	}
